@@ -1,0 +1,157 @@
+// Abstract Class
+abstract class Spacecraft {
+    private String name;
+    private double fuel;
+    private String missionType;
+    private String astronautName;
+    private int experience;
+
+    // Constructor
+    Spacecraft(String name, double fuel, String missionType,
+               String astronautName, int experience) {
+
+        this.name = name;
+        this.fuel = fuel;
+        this.missionType = missionType;
+        this.astronautName = astronautName;
+        this.experience = experience;
+    }
+
+    // ===== GETTERS =====
+    public String getName() { return name; }
+    public double getFuel() { return fuel; }
+    public String getMissionType() { return missionType; }
+    public String getAstronautName() { return astronautName; }
+    public int getExperience() { return experience; }
+
+    // ===== SETTERS =====
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setFuel(double fuel) {
+        this.fuel = fuel;
+    }
+
+    public void setMissionType(String missionType) {
+        this.missionType = missionType;
+    }
+
+    public void setAstronautName(String astronautName) {
+        this.astronautName = astronautName;
+    }
+
+    public void setExperience(int experience) {
+        this.experience = experience;
+    }
+
+    // Abstract methods
+    abstract String getType();
+    abstract void launch();
+    abstract double missionCost();
+    abstract void specialFeature();
+}
+
+// ===== Rocket =====
+class Rocket extends Spacecraft {
+    Rocket(String n, double f, String m, String a, int e) {
+        super(n, f, m, a, e);
+    }
+
+    String getType() { return "Rocket"; }
+
+    void launch() {
+        System.out.println("🚀 Rocket Launched!");
+    }
+
+    double missionCost() {
+        return getFuel() * 100;
+    }
+
+    void specialFeature() {
+        System.out.println("🔥 Booster activated!");
+    }
+}
+
+// ===== Satellite =====
+class Satellite extends Spacecraft {
+    Satellite(String n, double f, String m, String a, int e) {
+        super(n, f, m, a, e);
+    }
+
+    String getType() { return "Satellite"; }
+
+    void launch() {
+        System.out.println("🛰️ Satellite Deployed!");
+    }
+
+    double missionCost() {
+        return getFuel() * 70;
+    }
+
+    void specialFeature() {
+        System.out.println("📡 Transmitting signals...");
+    }
+}
+
+// ===== Shuttle =====
+class Shuttle extends Spacecraft {
+    Shuttle(String n, double f, String m, String a, int e) {
+        super(n, f, m, a, e);
+    }
+
+    String getType() { return "Shuttle"; }
+
+    void launch() {
+        System.out.println("✈️ Shuttle Takeoff!");
+    }
+
+    double missionCost() {
+        return getFuel() * 90;
+    }
+
+    void specialFeature() {
+        System.out.println("👨‍🚀 Carrying crew safely!");
+    }
+}
+
+// ===== MAIN CLASS =====
+public class SpaceMissionSystem {
+
+    public static void main(String[] args) {
+
+        System.out.println("=====================================");
+        System.out.println("   🚀 SPACE MISSION DASHBOARD");
+        System.out.println("=====================================\n");
+
+        Spacecraft s1 = new Rocket("Apollo", 600, "Moon", "Neil", 10);
+        Spacecraft s2 = new Satellite("Hubble", 350, "Earth Orbit", "John", 6);
+        Spacecraft s3 = new Shuttle("Discovery", 450, "Mars", "Alice", 8);
+
+        runMission(s1);
+        runMission(s2);
+        runMission(s3);
+
+        double total = s1.missionCost() + s2.missionCost() + s3.missionCost();
+
+        System.out.println("\n=====================================");
+        System.out.println("💰 TOTAL COST: " + total);
+        System.out.println("=====================================");
+    }
+
+    static void runMission(Spacecraft s) {
+
+        System.out.println("🚀 Type: " + s.getType());
+        System.out.println("Name: " + s.getName());
+        System.out.println("Mission: " + s.getMissionType());
+        System.out.println("Astronaut: " + s.getAstronautName());
+        System.out.println("Experience: " + s.getExperience() + " years");
+
+        s.launch();
+        s.specialFeature();
+
+        System.out.println("💰 Fuel Cost: " + s.missionCost());
+
+        System.out.println("----------------------------------");
+    }
+}
